@@ -6,8 +6,22 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Diary</title>
+    <style>
+        td{
+            width: 50px;
+            height: 50px;
+            border: 1px solid black ;
+        }
+    </style>
 </head>
 <body>
     <h1> welcome </h1>
+    <table>
+        <tr>
+            <% for(let r=0 ; r < 50; r++){%>
+            <td><%=r %></td>
+            <% } %>
+        </tr>
+    </table>
 </body>
 </html>
