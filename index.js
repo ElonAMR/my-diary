@@ -1,4 +1,4 @@
-// npm i express , body-parser , ejs , mysql2
+// npm i express , body-parser , ejs , mysql2 , slashes@2.0.0
 
 const port =7777;
 const express = require('express');
@@ -17,7 +17,8 @@ app.set("views" , path.join(__dirname,"./views"));
 let db_M=require('./database');
 global.db_pool = db_M.pool;
 
-
+global.addSlashes    = require('slashes').addSlashes;
+global.stripSlashes  = require('slashes').stripSlashes;
 
 
 app.listen(port , () => {
