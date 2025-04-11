@@ -14,6 +14,11 @@ app.set("view engine","ejs");
 app.set("views" , path.join(__dirname,"./views"));
 
 
+let db_M=require('./database');
+global.db_pool = db_M.pool;
+
+
+
 
 app.listen(port , () => {
     console.log(`Now Listening on port http://localhost:${port}`);
