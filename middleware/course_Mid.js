@@ -32,3 +32,27 @@ async function UpdateCourse(req,res,next){
 
     next();
 }
+
+async function GetOneCourse(req,res,next){
+    let id = parseInt(req.params.id);
+    console.log(id)
+    if((id === NaN) || (id <= 0)){
+        req.GoodOne=false;
+        return next();
+    }
+    req.GoodOne=true;
+    let Query=`SELECT * FROM courses  WHERE id='${id}' `;
+    const promisePool = db_pool.promise();
+    let rows=[];
+    req.one_course_data=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        if(rows.length > 0) {
+            req.one_course_data = rows[0];
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+    next();
+}
