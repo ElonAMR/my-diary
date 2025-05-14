@@ -72,3 +72,11 @@ async function DeleteCourse(req,res,next){
 
     next();
 }
+
+module.exports = {
+    AddCourse,
+    GetAllCourses,
+    GetOneCourse,
+    DeleteCourse,
+    UpdateCourse,
+}
