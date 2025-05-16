@@ -74,8 +74,8 @@ async function DeleteCourse(req,res,next){
 }
 
 module.exports = {
-    AddCourse,
-    GetAllCourses,
+    addCourse,
+    GetOneCourse,
     GetOneCourse,
     DeleteCourse,
     UpdateCourse,
