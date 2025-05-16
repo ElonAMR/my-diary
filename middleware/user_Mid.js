@@ -112,3 +112,21 @@ async function GetOneUser(req,res,next){
 
     next();
 }
+
+
+async function DeleteUser(req,res,next){
+    let id = parseInt(req.body.id);
+    if(id > 0) {
+        let Query = `DELETE FROM users WHERE id='${id}' `;
+        const promisePool = db_pool.promise();
+        let rows = [];
+        try {
+            [rows] = await promisePool.query(Query);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    next();
+
+}
