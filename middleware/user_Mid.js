@@ -39,3 +39,37 @@ async function AddUser(req,res,next){
 
     next();
 }
+
+
+async function UpdateUser(req,res,next){
+    let id = parseInt(req.params.id);
+    let name    = (req.body.name   !== undefined) ? addSlashes(req.body.name      ) : "";
+    let uname   = (req.body.uname  !== undefined) ? addSlashes(req.body.uname     ) : "";
+    // let passwd  = (req.body.passwd !== undefined) ? addSlashes(req.body.passwd    ) : "";
+    let email   = (req.body.email  !== undefined) ? addSlashes(req.body.email     ) : "";
+    let type_id = (req.body.type_id!== undefined) ?     Number(req.body.type_id   ) : -1;
+    let tz      = (req.body.tz     !== undefined) ? addSlashes(req.body.tz        ) : "";
+    if(id <= 0){
+        req.GoodOne=false;
+        return next();
+    }
+    req.GoodOne=true;
+
+    let Query=`UPDATE users SET `;
+    Query +=`name   ='${name   }' ,`;
+    Query +=`uname  ='${uname  }' ,`;
+    // Query +=`passwd ='${passwd }' ,`;
+    Query +=`email  ='${email  }' ,`;
+    Query +=`type_id='${type_id}' ,`;
+    Query +=`tz     ='${tz     }'  `;
+    Query +=` WHERE id='${id}'`;
+    const promisePool = db_pool.promise();
+    let rows=[];
+    try {
+        [rows] = await promisePool.query(Query);
+    } catch (err) {
+        console.log(err);
+    }
+
+    next();
+}
