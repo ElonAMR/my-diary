@@ -6,7 +6,7 @@ const user_Mid = require("../middleware/user_Mid");
 
 router.get('/Add', (req, res) => {
     res.render('user_add',{
-        date:{},
+        data:{},
     });
 });
 
