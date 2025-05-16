@@ -21,11 +21,17 @@ global.addSlashes    = require('slashes').addSlashes;
 global.stripSlashes  = require('slashes').stripSlashes;
 
 
-app.listen(port , () => {
-    console.log(`Now Listening on port http://localhost:${port}`);
-})
+const crs_R = require('./Routers/Course_R');
+app.use('/Crs',crs_R);
+
+
 
 
 app.get( '/' , (req,res) =>{
     res.render( "index" , {} );
 });
+
+
+app.listen(port , () => {
+    console.log(`Now Listening on port http://localhost:${port}`);
+})
