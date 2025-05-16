@@ -24,7 +24,8 @@ global.stripSlashes  = require('slashes').stripSlashes;
 const crs_R = require('./Routers/Course_R');
 app.use('/Crs',crs_R);
 
-
+const usr_R = require('./Routers/User_R');
+app.use( '/U' ,usr_R);
 
 
 app.get( '/' , (req,res) =>{
