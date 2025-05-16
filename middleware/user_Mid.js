@@ -73,3 +73,42 @@ async function UpdateUser(req,res,next){
 
     next();
 }
+
+
+async function GetAllUsers(req,res,next){
+    let Query="SELECT * FROM users";
+    const promisePool = db_pool.promise();
+    let rows=[];
+    req.users_data=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        req.users_data=rows;
+    } catch (err) {
+        console.log(err);
+    }
+
+    next();
+}
+async function GetOneUser(req,res,next){
+    let id = parseInt(req.params.id);
+    console.log(id)
+    if((id === NaN) || (id <= 0)){
+        req.GoodOne=false;
+        return next();
+    }
+    req.GoodOne=true;
+    let Query=`SELECT * FROM users  WHERE id='${id}' `;
+    const promisePool = db_pool.promise();
+    let rows=[];
+    req.one_user_data=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        if(rows.length > 0) {
+            req.one_user_data = rows[0];
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+    next();
+}
