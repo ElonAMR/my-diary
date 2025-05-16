@@ -33,6 +33,23 @@ async function UpdateCourse(req,res,next){
     next();
 }
 
+async function GetAllCourses(req,res,next){
+    let Query="SELECT * FROM courses";
+    const promisePool = db_pool.promise();
+    let rows=[];
+    req.courses_data=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        req.courses_data=rows;
+    } catch (err) {
+        console.log(err);
+    }
+
+    next();
+}
+
+
+
 async function GetOneCourse(req,res,next){
     let id = parseInt(req.params.id);
     console.log(id)
@@ -75,7 +92,7 @@ async function DeleteCourse(req,res,next){
 
 module.exports = {
     addCourse,
-    GetOneCourse,
+    GetAllCourses,
     GetOneCourse,
     DeleteCourse,
     UpdateCourse,
